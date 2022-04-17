@@ -1,0 +1,169 @@
+# K VIRTUAL ASSISTANT
+import speech_recognition as sp
+#import pywhatkit as py
+import pyttsx3
+import wikipedia
+import webbrowser
+import pyjokes
+import datetime
+
+rec = sp.Recognizer()
+_name_ ='k'
+
+my_micro =sp.Microphone(device_index=2)
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+def talk(text):
+    engine.say(text)
+    engine.runAndWait()
+
+def Wishrep():
+    hour=int(datetime.datetime.now().hour)
+    command=takeCommand()
+
+    if hour <= 12 :
+        print('User : ' + command )
+        talk('Morning sir ! Did you have your coffee today')
+        print('K : Morning sir ! Did you have your coffee today ?')
+    elif hour == 12 :
+        print('User : ' + command)
+        talk('Afternoon sir ! Did you have your lunch now ? ')
+        print('K : Afternoon sir ! Did you have your lunch now ?')
+    elif hour >= 12:
+        print('User : ' + command)
+        talk('Evening sir ! What did you want sir ?')
+        print('K : Evening sir ! What did you want sir ?')
+    elif hour >= 6:
+        print('User : ' + command)
+        talk('Yes Sir! what did you like sir?')
+        print('K : Evening sir ! what did you like sir?')
+
+
+def takeCommand():
+
+    with my_micro as source:
+            print('Say Something...')
+            rec.pause_threshold = 0.5
+            audio = rec.listen(source)
+
+    try:
+        print('recognising...')
+        command = rec.recognize_google(audio)
+        command = command.lower()
+
+    except Exception as e :
+        print('Sorry ! say it again please ')
+        talk('Sorry ! say it again please ')
+        return 'Hello k'
+#    except:
+#        pass
+    return command
+
+def ProceedP() :
+
+    command=takeCommand().lower
+    talk('Is there anything else you need, sir? ')
+    if command == 'yes' :
+        talk('what did you like sir ?')
+        takeCommand()
+        RunProcess()
+    elif command == 'no':
+        talk('have a nice day sir')
+        quit()
+
+def RunProcess():
+
+#take wikipedia
+    command = takeCommand().lower()
+    if 'wikipedia' in command:
+        person = command.replace('wikipedia', '')
+        info = wikipedia.summary(person, 1)
+        print(info)
+        talk(info)
+
+#take command browser
+    elif 'youtube' in command:
+        talk('Open Youtube')
+        print('Opening Youtube...')
+        webbrowser.open('youtube.com')
+
+    elif 'netflix' in command:
+
+        talk('Open Netflix')
+        print('Opening Netflix...')
+        webbrowser.open('Netflix.com')
+
+    elif 'facebook' in command:
+        talk('Open facebook')
+        print('Opening facebook...')
+        webbrowser.open('facebook.com')
+
+#take display time command
+    elif 'time' in command:
+        time = datetime.datetime.now().strftime('%I:%M %p')
+        print(time)
+        talk('Current time is ' + time)
+
+#speacific command define
+    elif 'single' in command:
+        talk('I am in relationship with my job sir')
+        print('I am in relationship with my job sir')
+
+    elif 'joke' in command:
+        talk(pyjokes.get_joke())
+        print(pyjokes.get_joke())
+
+
+    elif 'introduce' in command:
+        command = command.replace('k', '')
+        print('User : ' + command)
+        talk(
+        'My   name   is   k,I am   being   programed   to  assisted    Mister    Haziq   to   do   an   task   that   being   programmed   to  assist    him  .  im    not   fully   being   developed   by   my   master  ,  dated  that   being developed at 21 january 2022 ,monday.i   will   being   full   available   soon !!')
+        print(
+        'My   name   is   k,I am   being   programed   to  assisted    Mister    Haziq   to   do   an   task   that   being   programmed   to  assist    him  .  im    not   fully   being   developed   by   my   master  ,  dated  that   being developed at 21 january 2022 ,monday.i   will   being   full   available   soon !!')
+
+    elif 'developer' in command:
+        command = command.replace('k', '')
+        print('User : ' + command)
+        talk(
+        'Mister Haziq, full name Haziq Najmi, was born in 1998 and is currently 24 years old. He graduated from Kolej-Polytech Mara Batu Pahat with a Diploma and is currently a Bachelor Student at UNIKL MIIT.')
+        print(
+        'K : Mister Haziq, full name Haziq Najmi, was born in 1998 and is currently 24 years old. He graduated from Kolej-Polytech Mara Batu Pahat with a Diploma and is currently a Bachelor Student at UNIKL MIIT.')
+
+    elif 'how are you ' in command:
+        print('User ' + command)
+        talk('yes sir?   ')
+        talk('I am in superb Condition Sir')
+        talk('Thanks for your concern!!!')
+        print('K: yes sir,I am in superb Condition Sir, Thanks for your concern')
+
+
+while True :
+
+    Wishrep()
+    RunProcess()
+    RunProcess()
+
+
+
+
+
+#        elif 'time' in command:
+#            time = datetime.datetime.now().strftime('%I:%M %p')
+#           talk('Current time is ' + time)
+    #else:
+    #    talk("Sorry! Please say the command again")
+
+
+
+#greetingRep()
+
+
+
+
+
+
+
+
