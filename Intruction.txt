@@ -1,0 +1,8 @@
+Voice-Virtual-Assistances-K-
+
+-Need to install pyaudio module 
+ *if there is a problem by installing PyAudio,u need to change the phyton version to 3.6 or below to proceed the installation.
+- You need to download the ( speech recognition,pyttsx3,wikipedia,webbrowser,pyjokes) modules before usage 
+- copy paste the script in your ide n run it 
+
+feel free to ask if there have any problem 
